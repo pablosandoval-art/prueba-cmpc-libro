@@ -1,0 +1,131 @@
+// Modelo relacional de CMPC Libros.
+// Convención: nombres en inglés y camelCase en el código; tablas y columnas en snake_case (@map / @@map).
+
+generator client {
+  provider            = "prisma-client"
+  output              = "../src/generated/prisma"
+  moduleFormat        = "esm"
+  importFileExtension = "js"
+  previewFeatures     = ["postgresqlExtensions"]
+}
+
+datasource db {
+  provider   = "postgresql"
+  // pg_trgm habilita índices GIN por trigramas para búsquedas parciales (ILIKE '%texto%').
+  extensions = [pg_trgm]
+}
+
+/// Usuarios con acceso a la plataforma (sin roles).
+model User {
+  id           String   @id @default(uuid()) @db.Uuid
+  email        String   @unique
+  passwordHash String   @map("password_hash")
+  name         String
+  isActive     Boolean  @default(true) @map("is_active")
+  createdAt    DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt    DateTime @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+  auditLogs AuditLog[]
+
+  @@map("users")
+}
+
+/// Catálogo de géneros: conjunto cerrado que alimenta el selector del frontend.
+model Genre {
+  id        Int      @id @default(autoincrement())
+  name      String   @unique
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
+
+  books Book[]
+
+  @@map("genres")
+}
+
+/// Autores. Un libro tiene un autor. El nombre es único sin distinguir mayúsculas:
+/// esa restricción es un índice único sobre lower(name), creado en SQL en la migración
+/// (Prisma no puede expresar índices sobre expresiones).
+model Author {
+  id        Int      @id @default(autoincrement())
+  name      String
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
+
+  books Book[]
+
+  // Búsqueda parcial del combobox y del filtro de texto (ILIKE '%texto%').
+  @@index([name(ops: raw("gin_trgm_ops"))], type: Gin, map: "authors_name_trgm_idx")
+  @@map("authors")
+}
+
+/// Editoriales. Un libro tiene una editorial. Misma regla de unicidad que `Author`.
+model Publisher {
+  id        Int      @id @default(autoincrement())
+  name      String
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
+
+  books Book[]
+
+  @@index([name(ops: raw("gin_trgm_ops"))], type: Gin, map: "publishers_name_trgm_idx")
+  @@map("publishers")
+}
+
+/// Libro. Soft delete: `deletedAt` != null significa eliminado.
+model Book {
+  id          String    @id @default(uuid()) @db.Uuid
+  title       String
+  authorId    Int       @map("author_id")
+  publisherId Int       @map("publisher_id")
+  /// Precio en pesos chilenos (entero, sin decimales).
+  price       Int
+  /// Disponibilidad: unidades en stock.
+  stock       Int
+  genreId     Int       @map("genre_id")
+  imageUrl    String?   @map("image_url")
+  createdAt   DateTime  @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt   DateTime  @updatedAt @map("updated_at") @db.Timestamptz(3)
+  deletedAt   DateTime? @map("deleted_at") @db.Timestamptz(3)
+
+  genre     Genre     @relation(fields: [genreId], references: [id], onDelete: Restrict)
+  author    Author    @relation(fields: [authorId], references: [id], onDelete: Restrict)
+  publisher Publisher @relation(fields: [publisherId], references: [id], onDelete: Restrict)
+
+  // Búsqueda parcial case-insensitive del filtro de título.
+  @@index([title(ops: raw("gin_trgm_ops"))], type: Gin, map: "books_title_trgm_idx")
+  // Filtros por autor, editorial y género (FKs), siempre combinados con "no eliminado".
+  @@index([authorId, deletedAt])
+  @@index([publisherId, deletedAt])
+  @@index([genreId, deletedAt])
+  @@index([deletedAt, stock])
+  // Orden por defecto del listado (más recientes primero) sobre registros activos.
+  @@index([deletedAt, createdAt(sort: Desc)])
+  @@map("books")
+}
+
+enum AuditAction {
+  CREATE
+  UPDATE
+  DELETE
+}
+
+/// Bitácora de operaciones de escritura. Genérica: sirve para cualquier entidad.
+model AuditLog {
+  id         String      @id @default(uuid()) @db.Uuid
+  entityType String      @map("entity_type")
+  entityId   String      @map("entity_id")
+  action     AuditAction
+  userId     String      @map("user_id") @db.Uuid
+  /// Estado previo (null en CREATE).
+  before     Json?
+  /// Estado posterior.
+  after      Json?
+  createdAt  DateTime    @default(now()) @map("created_at") @db.Timestamptz(3)
+
+  user User @relation(fields: [userId], references: [id], onDelete: Restrict)
+
+  // Historial de una entidad concreta.
+  @@index([entityType, entityId, createdAt(sort: Desc)])
+  // Actividad de un usuario.
+  @@index([userId, createdAt(sort: Desc)])
+  // Listado cronológico general.
+  @@index([createdAt(sort: Desc)])
+  @@map("audit_logs")
+}

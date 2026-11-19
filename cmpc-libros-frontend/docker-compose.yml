@@ -1,0 +1,20 @@
+# Frontend de CMPC Libros (React compilado + nginx). Se puede usar solo: necesita una API accesible.
+#
+#   docker compose up -d --build     # http://localhost:8080
+#
+# Por defecto apunta a http://localhost:3000, donde la deja el docker-compose.yml del backend.
+# Para usar otra API, define PUBLIC_API_URL en un `.env` (opcional, ver .env.example) y reconstruye.
+# Esa API debe permitir (CORS) el origen desde el que abres la web, p. ej. http://localhost:8080.
+
+name: cmpc-libros-frontend
+
+services:
+  web:
+    build:
+      context: .
+      args:
+        # URL de la API tal como la ve el navegador. Se fija al compilar el frontend.
+        VITE_API_URL: ${PUBLIC_API_URL:-http://localhost:${API_PORT:-3000}}
+    restart: unless-stopped
+    ports:
+      - '${WEB_PORT:-8080}:80'

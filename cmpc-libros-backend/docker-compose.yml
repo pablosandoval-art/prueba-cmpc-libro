@@ -1,0 +1,71 @@
+# Backend de CMPC Libros: PostgreSQL + migraciones/seed + API. Se puede usar solo, sin el frontend.
+#
+#   cp .env.example .env              # y revisa JWT_SECRET
+#   docker compose up -d --build      # postgres → migrate (un solo uso) → api
+#   docker compose up -d postgres     # sólo la base (para desarrollar con `npm run start:dev`)
+#
+# En local, `docker-compose.override.yml` (se carga solo) publica el puerto de PostgreSQL.
+# El compose de la carpeta padre (stack completo) incluye ESTE archivo sin el override.
+
+name: cmpc-libros-backend
+
+services:
+  postgres:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-cmpc}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-cmpc}
+      POSTGRES_DB: ${POSTGRES_DB:-cmpc_libros}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}']
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  # Servicio de un solo uso: aplica las migraciones y carga el seed (idempotente) y termina.
+  migrate:
+    build:
+      context: .
+      target: migrate
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER:-cmpc}:${POSTGRES_PASSWORD:-cmpc}@postgres:5432/${POSTGRES_DB:-cmpc_libros}?schema=public
+      SEED_USER_EMAIL: ${SEED_USER_EMAIL:-admin@cmpc.cl}
+      SEED_USER_PASSWORD: ${SEED_USER_PASSWORD:-Admin1234!}
+      SEED_USER_NAME: ${SEED_USER_NAME:-Administrador}
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: 'no'
+
+  api:
+    build:
+      context: .
+      target: runtime
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER:-cmpc}:${POSTGRES_PASSWORD:-cmpc}@postgres:5432/${POSTGRES_DB:-cmpc_libros}?schema=public
+      JWT_SECRET: ${JWT_SECRET:?Copia .env.example a .env y define JWT_SECRET (mínimo 32 caracteres)}
+      JWT_EXPIRES_IN: ${JWT_EXPIRES_IN:-12h}
+      # La sesión viaja en una cookie HttpOnly; Secure exige HTTPS (en local, http://localhost, va en false).
+      COOKIE_SECURE: ${COOKIE_SECURE:-false}
+      LOGIN_MAX_ATTEMPTS: ${LOGIN_MAX_ATTEMPTS:-5}
+      LOGIN_LOCK_SECONDS: ${LOGIN_LOCK_SECONDS:-30}
+      # La imagen corre con NODE_ENV=production: logs JSON, uno por línea.
+      LOG_LEVEL: ${LOG_LEVEL:-info}
+      # Orígenes del frontend que pueden llamar a la API: el de Docker (WEB_PORT) y el de `npm run dev`.
+      CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost:${WEB_PORT:-8080},http://localhost:5173}
+      UPLOAD_MAX_BYTES: ${UPLOAD_MAX_BYTES:-2097152}
+    volumes:
+      - uploads:/app/uploads
+    ports:
+      - '${API_PORT:-3000}:3000'
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+
+volumes:
+  postgres-data:
+  uploads:

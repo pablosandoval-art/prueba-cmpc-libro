@@ -1,0 +1,27 @@
+# Fuera del contexto de build: lo regenerable, lo local y lo secreto.
+node_modules
+dist
+coverage
+uploads
+src/generated
+*.tsbuildinfo
+*.log
+*.stackdump
+
+.git
+.gitignore
+.gitattributes
+.vscode
+.claude
+
+.env
+.env.*
+!.env.example
+
+# Documentación y pruebas no hacen falta para construir la imagen.
+docs
+test
+*.md
+Dockerfile
+.dockerignore
+docker-compose.yml

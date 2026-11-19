@@ -1,0 +1,19 @@
+# CMPC Libros: stack completo para despliegue local.
+#
+#   cp .env.example .env     # y define JWT_SECRET
+#   docker compose up --build
+#
+# Servicios: postgres → migrate (migraciones + seed, un solo uso) → api, y web.
+# Cada proyecto define sus propios servicios en su docker-compose.yml y puede usarse por separado;
+# este archivo sólo los junta (`include`), de modo que la configuración vive en un único sitio.
+# Los proyectos son repositorios independientes en las carpetas hermanas ./cmpc-libros-backend
+# y ./cmpc-libros-frontend.
+
+name: cmpc-libros
+
+include:
+  # `env_file` hace que ambos lean el .env de ESTA carpeta (y no el .env de desarrollo de cada proyecto).
+  - path: ./cmpc-libros-backend/docker-compose.yml
+    env_file: ./.env
+  - path: ./cmpc-libros-frontend/docker-compose.yml
+    env_file: ./.env

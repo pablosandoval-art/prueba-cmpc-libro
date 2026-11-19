@@ -1,0 +1,7 @@
+# Sólo para trabajar en este repositorio: `docker compose` lo combina solo con docker-compose.yml.
+# El stack completo (carpeta padre) no lo carga, así que allí la base no publica ningún puerto.
+services:
+  postgres:
+    container_name: cmpc-libros-postgres
+    ports:
+      - '${POSTGRES_PORT:-5432}:5432'

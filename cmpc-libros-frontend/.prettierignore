@@ -1,0 +1,11 @@
+# Generado o de terceros: no se formatea
+dist
+coverage
+node_modules
+package-lock.json
+.impeccable
+.claude
+# Diagrama (XML de draw.io)
+docs/*.drawio
+# Documentación: se escribe a mano (DESIGN.md lo mantiene impeccable)
+*.md

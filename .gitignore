@@ -1,0 +1,6 @@
+# Secretos locales del stack
+.env
+
+# Local del editor y volcados de error del shell
+.vscode/
+*.stackdump

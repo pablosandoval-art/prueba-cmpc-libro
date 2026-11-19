@@ -1,0 +1,181 @@
+@import 'tailwindcss';
+@import '@fontsource-variable/archivo/wdth.css';
+
+/*
+ * «Cartulina y tinta»: cartulina white-top (zona de trabajo), kraft (marco),
+ * tinta flexo negra, verde flexo para la acción primaria y rojo/ámbar sólo
+ * para estados. Una sola familia: Archivo de ancho variable.
+ */
+@theme {
+  --font-sans: 'Archivo Variable', ui-sans-serif, system-ui, sans-serif;
+
+  --color-kraft: #b48a5a;
+  --color-kraft-deep: #7d5b35;
+  --color-kraft-pale: #e9dccb;
+  --color-board: #eef0eb;
+  --color-sheet: #ffffff;
+  --color-ink: #1e1e1c;
+  --color-ink-2: #45453f;
+  --color-ink-3: #61615a;
+  --color-rule: #cfd1ca;
+  --color-rule-soft: #e3e5df;
+  --color-field: #8a8c85;
+  --color-flexo: #1f6b3a;
+  --color-flexo-deep: #16502b;
+  --color-flexo-pale: #e3efe6;
+  --color-alert: #c2362b;
+  --color-alert-pale: #fbeae8;
+  --color-amber: #8a5600;
+  --color-amber-bar: #c98318;
+
+  --radius-sheet: 2px;
+}
+
+/* Voz condensada en mayúsculas: marca, títulos y etiquetas. */
+@utility type-display {
+  font-stretch: 68%;
+  font-weight: 850;
+  letter-spacing: -0.005em;
+  line-height: 1;
+}
+
+@utility type-label {
+  font-stretch: 80%;
+  font-weight: 700;
+  font-size: 0.6875rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* Línea de troquel: el movimiento distintivo que marca lo activo. */
+@utility die-line {
+  border: 1.5px dashed var(--color-ink);
+}
+
+@utility die-outline {
+  outline: 1.5px dashed var(--color-ink);
+  outline-offset: -4px;
+}
+
+@layer base {
+  html {
+    font-family: var(--font-sans);
+    background: var(--color-board);
+    color: var(--color-ink);
+    -webkit-font-smoothing: antialiased;
+    font-variant-numeric: tabular-nums;
+    scrollbar-color: var(--color-kraft) var(--color-board);
+    /* Reserva siempre el hueco de la barra: sin esto, pasar del listado (largo, con barra) al formulario
+       (corto, sin barra) ensancha la página unos 15 px y la cabecera se desplaza. */
+    scrollbar-gutter: stable;
+    caret-color: var(--color-ink);
+  }
+
+  body {
+    min-height: 100dvh;
+  }
+
+  ::selection {
+    background: var(--color-kraft-pale);
+    color: var(--color-ink);
+  }
+
+  /* El foco de teclado también se dibuja como línea de troquel. */
+  :focus-visible {
+    outline: 2px dashed var(--color-ink);
+    outline-offset: 2px;
+  }
+
+  input::placeholder {
+    color: var(--color-ink-3);
+    opacity: 1;
+  }
+
+  dialog::backdrop {
+    background: rgb(30 30 28 / 0.55);
+  }
+
+  a {
+    text-underline-offset: 3px;
+  }
+}
+
+/*
+ * Movimiento: salidas exponenciales (arrancan rápido y se asientan), siempre
+ * desde un estado ya visible o casi visible. Todo se apaga con
+ * prefers-reduced-motion; las clases quedan inertes y el contenido aparece directo.
+ */
+:root {
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  dialog[open] {
+    animation: sheet-in 220ms var(--ease-out-expo);
+  }
+
+  dialog[open]::backdrop {
+    animation: fade-in 200ms var(--ease-out-expo);
+  }
+
+  /* Pantalla nueva (listado → formulario): una sola entrada suave. */
+  .motion-page-in {
+    animation: rise-in 280ms var(--ease-out-expo) both;
+  }
+
+  /* Filas del listado: entran en cascada corta (las primeras 12). Las filas que
+     se conservan entre resultados no se vuelven a animar. */
+  .motion-row-in {
+    animation: rise-in 260ms var(--ease-out-expo) both;
+    animation-delay: calc(min(var(--i, 0), 12) * 18ms);
+  }
+
+  .motion-fade-in {
+    animation: fade-in 180ms var(--ease-out-expo) both;
+  }
+
+  .motion-pop-in {
+    animation: pop-in 140ms var(--ease-out-expo) both;
+    transform-origin: top;
+  }
+
+  .motion-toast-in {
+    animation: rise-in 260ms var(--ease-out-expo) both;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+@keyframes pop-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px) scale(0.98);
+  }
+}
+
+@keyframes slide {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(300%);
+  }
+}
+
+@keyframes sheet-in {
+  from {
+    transform: translateY(12px);
+    opacity: 0.6;
+  }
+}

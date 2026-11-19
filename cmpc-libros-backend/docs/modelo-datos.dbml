@@ -1,0 +1,107 @@
+// CMPC Libros — modelo relacional (PostgreSQL 17)
+// Pegar en https://dbdiagram.io (editor DBML) para ver el diagrama.
+// Fuente de verdad: prisma/schema.prisma + prisma/migrations.
+
+Project cmpc_libros {
+  database_type: 'PostgreSQL'
+  Note: '''
+  Gestión de libros con autenticación JWT, soft delete y auditoría.
+  Extensión pg_trgm habilitada para búsquedas parciales (ILIKE) indexadas.
+  '''
+}
+
+Enum audit_action {
+  CREATE
+  UPDATE
+  DELETE
+}
+
+Table users {
+  id uuid [pk, note: 'UUID generado por la aplicación']
+  email text [not null, unique, note: 'Normalizado a minúsculas']
+  password_hash text [not null, note: 'Hash bcrypt (costo 12)']
+  name text [not null]
+  is_active boolean [not null, default: true, note: 'Un usuario inactivo no puede iniciar sesión']
+  created_at timestamptz(3) [not null, default: `CURRENT_TIMESTAMP`]
+  updated_at timestamptz(3) [not null]
+
+  Note: 'Usuarios con acceso a la plataforma (sin roles). Cada operación auditada referencia a su autor.'
+}
+
+Table genres {
+  id serial [pk]
+  name text [not null, unique]
+  created_at timestamptz(3) [not null, default: `CURRENT_TIMESTAMP`]
+
+  Note: 'Catálogo cerrado de géneros: alimenta el selector del frontend y evita valores libres inconsistentes ("Ficción" vs "ficcion").'
+}
+
+Table authors {
+  id serial [pk]
+  name text [not null, note: 'Nombre normalizado (sin espacios sobrantes)']
+  created_at timestamptz(3) [not null, default: `CURRENT_TIMESTAMP`]
+
+  Indexes {
+    `lower(name)` [unique, name: 'authors_name_lower_key', note: 'Unicidad sin distinguir mayúsculas (índice sobre expresión)']
+    name [name: 'authors_name_trgm_idx', note: 'GIN (gin_trgm_ops) en PostgreSQL: búsqueda parcial ILIKE %texto%']
+  }
+
+  Note: 'Catálogo de autores. Un libro tiene un autor. Se crean desde el formulario (combobox con crear al vuelo).'
+}
+
+Table publishers {
+  id serial [pk]
+  name text [not null, note: 'Nombre normalizado (sin espacios sobrantes)']
+  created_at timestamptz(3) [not null, default: `CURRENT_TIMESTAMP`]
+
+  Indexes {
+    `lower(name)` [unique, name: 'publishers_name_lower_key', note: 'Unicidad sin distinguir mayúsculas (índice sobre expresión)']
+    name [name: 'publishers_name_trgm_idx', note: 'GIN (gin_trgm_ops) en PostgreSQL: búsqueda parcial ILIKE %texto%']
+  }
+
+  Note: 'Catálogo de editoriales. Un libro tiene una editorial. Misma regla de unicidad que authors.'
+}
+
+Table books {
+  id uuid [pk]
+  title text [not null]
+  author_id integer [not null, ref: > authors.id]
+  publisher_id integer [not null, ref: > publishers.id]
+  price integer [not null, note: 'CLP, entero. CHECK (price >= 0)']
+  stock integer [not null, note: 'Disponibilidad. CHECK (stock >= 0)']
+  genre_id integer [not null, ref: > genres.id]
+  image_url text [note: 'Ruta relativa /uploads/<uuid>.<ext>']
+  created_at timestamptz(3) [not null, default: `CURRENT_TIMESTAMP`]
+  updated_at timestamptz(3) [not null]
+  deleted_at timestamptz(3) [note: 'Soft delete: NULL = activo']
+
+  Indexes {
+    title [name: 'books_title_trgm_idx', note: 'GIN (gin_trgm_ops) en PostgreSQL: filtro ILIKE %titulo%']
+    (author_id, deleted_at) [name: 'books_author_id_deleted_at_idx', note: 'Filtro por autor sobre libros activos (y FK)']
+    (publisher_id, deleted_at) [name: 'books_publisher_id_deleted_at_idx', note: 'Filtro por editorial sobre libros activos (y FK)']
+    (genre_id, deleted_at) [name: 'books_genre_id_deleted_at_idx', note: 'Filtro por género sobre libros activos (y FK)']
+    (deleted_at, stock) [name: 'books_deleted_at_stock_idx', note: 'Filtro de disponibilidad sobre libros activos']
+    (deleted_at, created_at) [name: 'books_deleted_at_created_at_idx', note: 'Orden por defecto: más recientes primero (DESC)']
+  }
+
+  Note: 'Libros. ON DELETE RESTRICT hacia genres, authors y publishers: no se puede borrar un registro en uso.'
+}
+
+Table audit_logs {
+  id uuid [pk]
+  entity_type text [not null, note: 'Ej.: Book. Genérico para auditar otras entidades a futuro']
+  entity_id text [not null]
+  action audit_action [not null]
+  user_id uuid [not null, ref: > users.id]
+  before jsonb [note: 'Estado previo (NULL en CREATE)']
+  after jsonb [note: 'Estado posterior']
+  created_at timestamptz(3) [not null, default: `CURRENT_TIMESTAMP`]
+
+  Indexes {
+    (entity_type, entity_id, created_at) [name: 'audit_logs_entity_type_entity_id_created_at_idx', note: 'Historial de una entidad (created_at DESC)']
+    (user_id, created_at) [name: 'audit_logs_user_id_created_at_idx', note: 'Actividad de un usuario (created_at DESC)']
+    created_at [name: 'audit_logs_created_at_idx', note: 'Listado cronológico (DESC)']
+  }
+
+  Note: 'Bitácora inmutable de escrituras. Se inserta en la MISMA transacción que la operación auditada.'
+}

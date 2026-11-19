@@ -1,0 +1,21 @@
+# Fuera del contexto de build: lo regenerable, lo local y lo secreto.
+node_modules
+dist
+coverage
+*.log
+*.stackdump
+
+.git
+.gitignore
+.vscode
+.claude
+.impeccable
+
+.env
+.env.*
+!.env.example
+
+docs
+*.md
+Dockerfile
+.dockerignore

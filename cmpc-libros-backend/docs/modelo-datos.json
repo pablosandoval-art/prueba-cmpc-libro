@@ -1,0 +1,1026 @@
+{
+  "schemas": [],
+  "tables": [
+    {
+      "name": "users",
+      "schemaName": null,
+      "alias": null,
+      "fields": [
+        {
+          "name": "id",
+          "type": {
+            "schemaName": null,
+            "type_name": "uuid",
+            "args": null
+          },
+          "pk": true,
+          "unique": false,
+          "note": {
+            "value": "UUID generado por la aplicación"
+          },
+          "metadata": {},
+          "inline_refs": [],
+          "inline_deps": [],
+          "checks": []
+        },
+        {
+          "name": "email",
+          "type": {
+            "schemaName": null,
+            "type_name": "text",
+            "args": null
+          },
+          "pk": false,
+          "unique": true,
+          "not_null": true,
+          "note": {
+            "value": "Normalizado a minúsculas"
+          },
+          "metadata": {},
+          "inline_refs": [],
+          "inline_deps": [],
+          "checks": []
+        },
+        {
+          "name": "password_hash",
+          "type": {
+            "schemaName": null,
+            "type_name": "text",
+            "args": null
+          },
+          "pk": false,
+          "unique": false,
+          "not_null": true,
+          "note": {
+            "value": "Hash bcrypt (costo 12)"
+          },
+          "metadata": {},
+          "inline_refs": [],
+          "inline_deps": [],
+          "checks": []
+        },
+        {
+          "name": "name",
+          "type": {
+            "schemaName": null,
+            "type_name": "text",
+            "args": null
+          },
+          "pk": false,
+          "unique": false,
+          "not_null": true,
+          "metadata": {},
+          "inline_refs": [],
+          "inline_deps": [],
+          "checks": []
+        },
+        {
+          "name": "is_active",
+          "type": {
+            "schemaName": null,
+            "type_name": "boolean",
+            "args": null
+          },
+          "pk": false,
+          "unique": false,
+          "not_null": true,
+          "dbdefault": {
+            "value": "true",
+            "type": "boolean"
+          },
+          "note": {
+            "value": "Un usuario inactivo no puede iniciar sesión"
+          },
+          "metadata": {},
+          "inline_refs": [],
+          "inline_deps": [],
+          "checks": []
+        },
+        {
+          "name": "created_at",
+          "type": {
+            "schemaName": null,
+            "type_name": "timestamptz(3)",
+            "args": "3"
+          },
+          "pk": false,
+          "unique": false,
+          "not_null": true,
+          "dbdefault": {
+            "value": "CURRENT_TIMESTAMP",
+            "type": "expression"
+          },
+          "metadata": {},
+          "inline_refs": [],
+          "inline_deps": [],
+          "checks": []
+        },
+        {
+          "name": "updated_at",
+          "type": {
+            "schemaName": null,
+            "type_name": "timestamptz(3)",
+            "args": "3"
+          },
+          "pk": false,
+          "unique": false,
+          "not_null": true,
+          "metadata": {},
+          "inline_refs": [],
+          "inline_deps": [],
+          "checks": []
+        }
+      ],
+      "indexes": [],
+      "partials": [],
+      "checks": [],
+      "metadata": {},
+      "note": {
+        "value": "Usuarios con acceso a la plataforma (sin roles). Cada operación auditada referencia a su autor."
+      }
+    },
+    {
+      "name": "genres",
+      "schemaName": null,
+      "alias": null,
+      "fields": [
+        {
+          "name": "id",
+          "type": {
+            "schemaName": null,
+            "type_name": "serial",
+            "args": null
+          },
+          "pk": true,
+          "unique": false,
+          "metadata": {},
+          "inline_refs": [],
+          "inline_deps": [],
+          "checks": []
+        },
+        {
+          "name": "name",
+          "type": {
+            "schemaName": null,
+            "type_name": "text",
+            "args": null
+          },
+          "pk": false,
+          "unique": true,
+          "not_null": true,
+          "metadata": {},
+          "inline_refs": [],
+          "inline_deps": [],
+          "checks": []
+        },
+        {
+          "name": "created_at",
+          "type": {
+            "schemaName": null,
+            "type_name": "timestamptz(3)",
+            "args": "3"
+          },
+          "pk": false,
+          "unique": false,
+          "not_null": true,
+          "dbdefault": {
+            "value": "CURRENT_TIMESTAMP",
+            "type": "expression"
+          },
+          "metadata": {},
+          "inline_refs": [],
+          "inline_deps": [],
+          "checks": []
+        }
+      ],
+      "indexes": [],
+      "partials": [],
+      "checks": [],
+      "metadata": {},
+      "note": {
+        "value": "Catálogo cerrado de géneros: alimenta el selector del frontend y evita valores libres inconsistentes (\"Ficción\" vs \"ficcion\")."
+      }
+    },
+    {
+      "name": "authors",
+      "schemaName": null,
+      "alias": null,
+      "fields": [
+        {
+          "name": "id",
+          "type": {
+            "schemaName": null,
+            "type_name": "serial",
+            "args": null
+          },
+          "pk": true,
+          "unique": false,
+          "metadata": {},
+          "inline_refs": [],
+          "inline_deps": [],
+          "checks": []
+        },
+        {
+          "name": "name",
+          "type": {
+            "schemaName": null,
+            "type_name": "text",
+            "args": null
+          },
+          "pk": false,
+          "unique": false,
+          "not_null": true,
+          "note": {
+            "value": "Nombre normalizado (sin espacios sobrantes)"
+          },
+          "metadata": {},
+          "inline_refs": [],
+          "inline_deps": [],
+          "checks": []
+        },
+        {
+          "name": "created_at",
+          "type": {
+            "schemaName": null,
+            "type_name": "timestamptz(3)",
+            "args": "3"
+          },
+          "pk": false,
+          "unique": false,
+          "not_null": true,
+          "dbdefault": {
+            "value": "CURRENT_TIMESTAMP",
+            "type": "expression"
+          },
+          "metadata": {},
+          "inline_refs": [],
+          "inline_deps": [],
+          "checks": []
+        }
+      ],
+      "indexes": [
+        {
+          "columns": [
+            {
+              "value": "lower(name)",
+              "type": "expression"
+            }
+          ],
+          "unique": true,
+          "name": "authors_name_lower_key",
+          "note": {
+            "value": "Unicidad sin distinguir mayúsculas (índice sobre expresión)"
+          }
+        },
+        {
+          "columns": [
+            {
+              "value": "name",
+              "type": "column"
+            }
+          ],
+          "name": "authors_name_trgm_idx",
+          "note": {
+            "value": "GIN (gin_trgm_ops) en PostgreSQL: búsqueda parcial ILIKE %texto%"
+          }
+        }
+      ],
+      "partials": [],
+      "checks": [],
+      "metadata": {},
+      "note": {
+        "value": "Catálogo de autores. Un libro tiene un autor. Se crean desde el formulario (combobox con crear al vuelo)."
+      }
+    },
+    {
+      "name": "publishers",
+      "schemaName": null,
+      "alias": null,
+      "fields": [
+        {
+          "name": "id",
+          "type": {
+            "schemaName": null,
+            "type_name": "serial",
+            "args": null
+          },
+          "pk": true,
+          "unique": false,
+          "metadata": {},
+          "inline_refs": [],
+          "inline_deps": [],
+          "checks": []
+        },
+        {
+          "name": "name",
+          "type": {
+            "schemaName": null,
+            "type_name": "text",
+            "args": null
+          },
+          "pk": false,
+          "unique": false,
+          "not_null": true,
+          "note": {
+            "value": "Nombre normalizado (sin espacios sobrantes)"
+          },
+          "metadata": {},
+          "inline_refs": [],
+          "inline_deps": [],
+          "checks": []
+        },
+        {
+          "name": "created_at",
+          "type": {
+            "schemaName": null,
+            "type_name": "timestamptz(3)",
+            "args": "3"
+          },
+          "pk": false,
+          "unique": false,
+          "not_null": true,
+          "dbdefault": {
+            "value": "CURRENT_TIMESTAMP",
+            "type": "expression"
+          },
+          "metadata": {},
+          "inline_refs": [],
+          "inline_deps": [],
+          "checks": []
+        }
+      ],
+      "indexes": [
+        {
+          "columns": [
+            {
+              "value": "lower(name)",
+              "type": "expression"
+            }
+          ],
+          "unique": true,
+          "name": "publishers_name_lower_key",
+          "note": {
+            "value": "Unicidad sin distinguir mayúsculas (índice sobre expresión)"
+          }
+        },
+        {
+          "columns": [
+            {
+              "value": "name",
+              "type": "column"
+            }
+          ],
+          "name": "publishers_name_trgm_idx",
+          "note": {
+            "value": "GIN (gin_trgm_ops) en PostgreSQL: búsqueda parcial ILIKE %texto%"
+          }
+        }
+      ],
+      "partials": [],
+      "checks": [],
+      "metadata": {},
+      "note": {
+        "value": "Catálogo de editoriales. Un libro tiene una editorial. Misma regla de unicidad que authors."
+      }
+    },
+    {
+      "name": "books",
+      "schemaName": null,
+      "alias": null,
+      "fields": [
+        {
+          "name": "id",
+          "type": {
+            "schemaName": null,
+            "type_name": "uuid",
+            "args": null
+          },
+          "pk": true,
+          "unique": false,
+          "metadata": {},
+          "inline_refs": [],
+          "inline_deps": [],
+          "checks": []
+        },
+        {
+          "name": "title",
+          "type": {
+            "schemaName": null,
+            "type_name": "text",
+            "args": null
+          },
+          "pk": false,
+          "unique": false,
+          "not_null": true,
+          "metadata": {},
+          "inline_refs": [],
+          "inline_deps": [],
+          "checks": []
+        },
+        {
+          "name": "author_id",
+          "type": {
+            "schemaName": null,
+            "type_name": "integer",
+            "args": null
+          },
+          "pk": false,
+          "unique": false,
+          "not_null": true,
+          "metadata": {},
+          "inline_refs": [
+            {
+              "schemaName": null,
+              "tableName": "authors",
+              "fieldNames": [
+                "id"
+              ],
+              "relation": ">"
+            }
+          ],
+          "inline_deps": [],
+          "checks": []
+        },
+        {
+          "name": "publisher_id",
+          "type": {
+            "schemaName": null,
+            "type_name": "integer",
+            "args": null
+          },
+          "pk": false,
+          "unique": false,
+          "not_null": true,
+          "metadata": {},
+          "inline_refs": [
+            {
+              "schemaName": null,
+              "tableName": "publishers",
+              "fieldNames": [
+                "id"
+              ],
+              "relation": ">"
+            }
+          ],
+          "inline_deps": [],
+          "checks": []
+        },
+        {
+          "name": "price",
+          "type": {
+            "schemaName": null,
+            "type_name": "integer",
+            "args": null
+          },
+          "pk": false,
+          "unique": false,
+          "not_null": true,
+          "note": {
+            "value": "CLP, entero. CHECK (price >= 0)"
+          },
+          "metadata": {},
+          "inline_refs": [],
+          "inline_deps": [],
+          "checks": []
+        },
+        {
+          "name": "stock",
+          "type": {
+            "schemaName": null,
+            "type_name": "integer",
+            "args": null
+          },
+          "pk": false,
+          "unique": false,
+          "not_null": true,
+          "note": {
+            "value": "Disponibilidad. CHECK (stock >= 0)"
+          },
+          "metadata": {},
+          "inline_refs": [],
+          "inline_deps": [],
+          "checks": []
+        },
+        {
+          "name": "genre_id",
+          "type": {
+            "schemaName": null,
+            "type_name": "integer",
+            "args": null
+          },
+          "pk": false,
+          "unique": false,
+          "not_null": true,
+          "metadata": {},
+          "inline_refs": [
+            {
+              "schemaName": null,
+              "tableName": "genres",
+              "fieldNames": [
+                "id"
+              ],
+              "relation": ">"
+            }
+          ],
+          "inline_deps": [],
+          "checks": []
+        },
+        {
+          "name": "image_url",
+          "type": {
+            "schemaName": null,
+            "type_name": "text",
+            "args": null
+          },
+          "pk": false,
+          "unique": false,
+          "note": {
+            "value": "Ruta relativa /uploads/<uuid>.<ext>"
+          },
+          "metadata": {},
+          "inline_refs": [],
+          "inline_deps": [],
+          "checks": []
+        },
+        {
+          "name": "created_at",
+          "type": {
+            "schemaName": null,
+            "type_name": "timestamptz(3)",
+            "args": "3"
+          },
+          "pk": false,
+          "unique": false,
+          "not_null": true,
+          "dbdefault": {
+            "value": "CURRENT_TIMESTAMP",
+            "type": "expression"
+          },
+          "metadata": {},
+          "inline_refs": [],
+          "inline_deps": [],
+          "checks": []
+        },
+        {
+          "name": "updated_at",
+          "type": {
+            "schemaName": null,
+            "type_name": "timestamptz(3)",
+            "args": "3"
+          },
+          "pk": false,
+          "unique": false,
+          "not_null": true,
+          "metadata": {},
+          "inline_refs": [],
+          "inline_deps": [],
+          "checks": []
+        },
+        {
+          "name": "deleted_at",
+          "type": {
+            "schemaName": null,
+            "type_name": "timestamptz(3)",
+            "args": "3"
+          },
+          "pk": false,
+          "unique": false,
+          "note": {
+            "value": "Soft delete: NULL = activo"
+          },
+          "metadata": {},
+          "inline_refs": [],
+          "inline_deps": [],
+          "checks": []
+        }
+      ],
+      "indexes": [
+        {
+          "columns": [
+            {
+              "value": "title",
+              "type": "column"
+            }
+          ],
+          "name": "books_title_trgm_idx",
+          "note": {
+            "value": "GIN (gin_trgm_ops) en PostgreSQL: filtro ILIKE %titulo%"
+          }
+        },
+        {
+          "columns": [
+            {
+              "value": "author_id",
+              "type": "column"
+            },
+            {
+              "value": "deleted_at",
+              "type": "column"
+            }
+          ],
+          "name": "books_author_id_deleted_at_idx",
+          "note": {
+            "value": "Filtro por autor sobre libros activos (y FK)"
+          }
+        },
+        {
+          "columns": [
+            {
+              "value": "publisher_id",
+              "type": "column"
+            },
+            {
+              "value": "deleted_at",
+              "type": "column"
+            }
+          ],
+          "name": "books_publisher_id_deleted_at_idx",
+          "note": {
+            "value": "Filtro por editorial sobre libros activos (y FK)"
+          }
+        },
+        {
+          "columns": [
+            {
+              "value": "genre_id",
+              "type": "column"
+            },
+            {
+              "value": "deleted_at",
+              "type": "column"
+            }
+          ],
+          "name": "books_genre_id_deleted_at_idx",
+          "note": {
+            "value": "Filtro por género sobre libros activos (y FK)"
+          }
+        },
+        {
+          "columns": [
+            {
+              "value": "deleted_at",
+              "type": "column"
+            },
+            {
+              "value": "stock",
+              "type": "column"
+            }
+          ],
+          "name": "books_deleted_at_stock_idx",
+          "note": {
+            "value": "Filtro de disponibilidad sobre libros activos"
+          }
+        },
+        {
+          "columns": [
+            {
+              "value": "deleted_at",
+              "type": "column"
+            },
+            {
+              "value": "created_at",
+              "type": "column"
+            }
+          ],
+          "name": "books_deleted_at_created_at_idx",
+          "note": {
+            "value": "Orden por defecto: más recientes primero (DESC)"
+          }
+        }
+      ],
+      "partials": [],
+      "checks": [],
+      "metadata": {},
+      "note": {
+        "value": "Libros. ON DELETE RESTRICT hacia genres, authors y publishers: no se puede borrar un registro en uso."
+      }
+    },
+    {
+      "name": "audit_logs",
+      "schemaName": null,
+      "alias": null,
+      "fields": [
+        {
+          "name": "id",
+          "type": {
+            "schemaName": null,
+            "type_name": "uuid",
+            "args": null
+          },
+          "pk": true,
+          "unique": false,
+          "metadata": {},
+          "inline_refs": [],
+          "inline_deps": [],
+          "checks": []
+        },
+        {
+          "name": "entity_type",
+          "type": {
+            "schemaName": null,
+            "type_name": "text",
+            "args": null
+          },
+          "pk": false,
+          "unique": false,
+          "not_null": true,
+          "note": {
+            "value": "Ej.: Book. Genérico para auditar otras entidades a futuro"
+          },
+          "metadata": {},
+          "inline_refs": [],
+          "inline_deps": [],
+          "checks": []
+        },
+        {
+          "name": "entity_id",
+          "type": {
+            "schemaName": null,
+            "type_name": "text",
+            "args": null
+          },
+          "pk": false,
+          "unique": false,
+          "not_null": true,
+          "metadata": {},
+          "inline_refs": [],
+          "inline_deps": [],
+          "checks": []
+        },
+        {
+          "name": "action",
+          "type": {
+            "schemaName": null,
+            "type_name": "audit_action",
+            "args": null
+          },
+          "pk": false,
+          "unique": false,
+          "not_null": true,
+          "metadata": {},
+          "inline_refs": [],
+          "inline_deps": [],
+          "checks": []
+        },
+        {
+          "name": "user_id",
+          "type": {
+            "schemaName": null,
+            "type_name": "uuid",
+            "args": null
+          },
+          "pk": false,
+          "unique": false,
+          "not_null": true,
+          "metadata": {},
+          "inline_refs": [
+            {
+              "schemaName": null,
+              "tableName": "users",
+              "fieldNames": [
+                "id"
+              ],
+              "relation": ">"
+            }
+          ],
+          "inline_deps": [],
+          "checks": []
+        },
+        {
+          "name": "before",
+          "type": {
+            "schemaName": null,
+            "type_name": "jsonb",
+            "args": null
+          },
+          "pk": false,
+          "unique": false,
+          "note": {
+            "value": "Estado previo (NULL en CREATE)"
+          },
+          "metadata": {},
+          "inline_refs": [],
+          "inline_deps": [],
+          "checks": []
+        },
+        {
+          "name": "after",
+          "type": {
+            "schemaName": null,
+            "type_name": "jsonb",
+            "args": null
+          },
+          "pk": false,
+          "unique": false,
+          "note": {
+            "value": "Estado posterior"
+          },
+          "metadata": {},
+          "inline_refs": [],
+          "inline_deps": [],
+          "checks": []
+        },
+        {
+          "name": "created_at",
+          "type": {
+            "schemaName": null,
+            "type_name": "timestamptz(3)",
+            "args": "3"
+          },
+          "pk": false,
+          "unique": false,
+          "not_null": true,
+          "dbdefault": {
+            "value": "CURRENT_TIMESTAMP",
+            "type": "expression"
+          },
+          "metadata": {},
+          "inline_refs": [],
+          "inline_deps": [],
+          "checks": []
+        }
+      ],
+      "indexes": [
+        {
+          "columns": [
+            {
+              "value": "entity_type",
+              "type": "column"
+            },
+            {
+              "value": "entity_id",
+              "type": "column"
+            },
+            {
+              "value": "created_at",
+              "type": "column"
+            }
+          ],
+          "name": "audit_logs_entity_type_entity_id_created_at_idx",
+          "note": {
+            "value": "Historial de una entidad (created_at DESC)"
+          }
+        },
+        {
+          "columns": [
+            {
+              "value": "user_id",
+              "type": "column"
+            },
+            {
+              "value": "created_at",
+              "type": "column"
+            }
+          ],
+          "name": "audit_logs_user_id_created_at_idx",
+          "note": {
+            "value": "Actividad de un usuario (created_at DESC)"
+          }
+        },
+        {
+          "columns": [
+            {
+              "value": "created_at",
+              "type": "column"
+            }
+          ],
+          "name": "audit_logs_created_at_idx",
+          "note": {
+            "value": "Listado cronológico (DESC)"
+          }
+        }
+      ],
+      "partials": [],
+      "checks": [],
+      "metadata": {},
+      "note": {
+        "value": "Bitácora inmutable de escrituras. Se inserta en la MISMA transacción que la operación auditada."
+      }
+    }
+  ],
+  "notes": [],
+  "refs": [
+    {
+      "endpoints": [
+        {
+          "schemaName": null,
+          "tableName": "authors",
+          "fieldNames": [
+            "id"
+          ],
+          "relation": "1"
+        },
+        {
+          "schemaName": null,
+          "tableName": "books",
+          "fieldNames": [
+            "author_id"
+          ],
+          "relation": "*"
+        }
+      ]
+    },
+    {
+      "endpoints": [
+        {
+          "schemaName": null,
+          "tableName": "publishers",
+          "fieldNames": [
+            "id"
+          ],
+          "relation": "1"
+        },
+        {
+          "schemaName": null,
+          "tableName": "books",
+          "fieldNames": [
+            "publisher_id"
+          ],
+          "relation": "*"
+        }
+      ]
+    },
+    {
+      "endpoints": [
+        {
+          "schemaName": null,
+          "tableName": "genres",
+          "fieldNames": [
+            "id"
+          ],
+          "relation": "1"
+        },
+        {
+          "schemaName": null,
+          "tableName": "books",
+          "fieldNames": [
+            "genre_id"
+          ],
+          "relation": "*"
+        }
+      ]
+    },
+    {
+      "endpoints": [
+        {
+          "schemaName": null,
+          "tableName": "users",
+          "fieldNames": [
+            "id"
+          ],
+          "relation": "1"
+        },
+        {
+          "schemaName": null,
+          "tableName": "audit_logs",
+          "fieldNames": [
+            "user_id"
+          ],
+          "relation": "*"
+        }
+      ]
+    }
+  ],
+  "deps": [],
+  "enums": [
+    {
+      "values": [
+        {
+          "name": "CREATE"
+        },
+        {
+          "name": "UPDATE"
+        },
+        {
+          "name": "DELETE"
+        }
+      ],
+      "name": "audit_action",
+      "schemaName": null
+    }
+  ],
+  "tableGroups": [],
+  "aliases": [],
+  "tablePartials": [],
+  "records": [],
+  "diagramViews": [],
+  "externals": {
+    "tables": [],
+    "enums": [],
+    "tableGroups": [],
+    "tablePartials": [],
+    "notes": []
+  },
+  "project": {
+    "enums": [],
+    "refs": [],
+    "tableGroups": [],
+    "tables": [],
+    "tablePartials": [],
+    "name": "cmpc_libros",
+    "database_type": "PostgreSQL",
+    "note": {
+      "value": "Gestión de libros con autenticación JWT, soft delete y auditoría.\nExtensión pg_trgm habilitada para búsquedas parciales (ILIKE) indexadas.\n"
+    }
+  }
+}

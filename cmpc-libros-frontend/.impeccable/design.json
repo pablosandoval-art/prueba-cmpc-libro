@@ -1,0 +1,494 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-18T18:11:44.845Z",
+  "title": "Design System: CMPC Libros",
+  "extensions": {
+    "colorMeta": {
+      "kraft": {
+        "role": "secondary",
+        "displayName": "Kraft",
+        "canonical": "oklch(66.3% 0.082 69)",
+        "tonalRamp": [
+          "#130901",
+          "#32200a",
+          "#543a1b",
+          "#78562d",
+          "#9e784d",
+          "#be9e7c",
+          "#dec6ac",
+          "#fcebda"
+        ]
+      },
+      "kraft-deep": {
+        "role": "secondary",
+        "displayName": "Kraft Tostado",
+        "canonical": "oklch(49.8% 0.070 68)",
+        "tonalRamp": [
+          "#120902",
+          "#30200f",
+          "#513b22",
+          "#755736",
+          "#9a7956",
+          "#ba9f83",
+          "#dbc7b1",
+          "#faecdd"
+        ]
+      },
+      "kraft-pale": {
+        "role": "secondary",
+        "displayName": "Kraft Pálido",
+        "canonical": "oklch(90.0% 0.027 74)",
+        "tonalRamp": [
+          "#0e0b07",
+          "#28231c",
+          "#463e35",
+          "#665c4f",
+          "#897e70",
+          "#aca397",
+          "#d0c9c0",
+          "#f2eee7"
+        ]
+      },
+      "board": {
+        "role": "neutral",
+        "displayName": "Mesa",
+        "canonical": "oklch(95.2% 0.007 124)",
+        "tonalRamp": [
+          "#0b0b0a",
+          "#242422",
+          "#3f403d",
+          "#5d5e5a",
+          "#7f817d",
+          "#a4a5a2",
+          "#cacbc8",
+          "#eeefed"
+        ]
+      },
+      "sheet": {
+        "role": "neutral",
+        "displayName": "Cartulina",
+        "canonical": "oklch(100.0% 0.000 89)",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#242424",
+          "#404040",
+          "#5d5d5d",
+          "#808080",
+          "#a4a4a4",
+          "#cacaca",
+          "#eeeeee"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Tinta Flexo",
+        "canonical": "oklch(23.4% 0.004 106)",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#242423",
+          "#40403e",
+          "#5e5e5c",
+          "#80807e",
+          "#a5a5a3",
+          "#cacac9",
+          "#eeeeed"
+        ]
+      },
+      "ink-2": {
+        "role": "neutral",
+        "displayName": "Tinta Media",
+        "canonical": "oklch(38.8% 0.010 106)",
+        "tonalRamp": [
+          "#0b0b0a",
+          "#242421",
+          "#40403c",
+          "#5e5e58",
+          "#81817a",
+          "#a5a5a0",
+          "#cbcbc7",
+          "#efefec"
+        ]
+      },
+      "ink-3": {
+        "role": "neutral",
+        "displayName": "Tinta Clara",
+        "canonical": "oklch(49.0% 0.011 106)",
+        "tonalRamp": [
+          "#0b0b09",
+          "#242421",
+          "#40403b",
+          "#5e5e58",
+          "#81817a",
+          "#a5a59f",
+          "#cbcbc6",
+          "#efefec"
+        ]
+      },
+      "rule": {
+        "role": "neutral",
+        "displayName": "Filete",
+        "canonical": "oklch(85.7% 0.010 119)",
+        "tonalRamp": [
+          "#0b0b0a",
+          "#242422",
+          "#3f403c",
+          "#5d5e59",
+          "#7f817b",
+          "#a4a5a0",
+          "#cacbc7",
+          "#eeefec"
+        ]
+      },
+      "rule-soft": {
+        "role": "neutral",
+        "displayName": "Filete Suave",
+        "canonical": "oklch(91.9% 0.008 121)",
+        "tonalRamp": [
+          "#0b0b0a",
+          "#242422",
+          "#3f403d",
+          "#5d5e5a",
+          "#7f817c",
+          "#a4a5a1",
+          "#cacbc8",
+          "#eeefed"
+        ]
+      },
+      "field": {
+        "role": "neutral",
+        "displayName": "Borde de Control",
+        "canonical": "oklch(63.6% 0.011 119)",
+        "tonalRamp": [
+          "#0b0b0a",
+          "#242421",
+          "#3f403c",
+          "#5d5e59",
+          "#7f817b",
+          "#a4a5a0",
+          "#cacbc7",
+          "#eeefec"
+        ]
+      },
+      "flexo": {
+        "role": "primary",
+        "displayName": "Verde Flexo",
+        "canonical": "oklch(46.9% 0.108 151)",
+        "tonalRamp": [
+          "#001004",
+          "#092c15",
+          "#1b4b2a",
+          "#2e6d41",
+          "#509162",
+          "#80b38c",
+          "#b0d6b8",
+          "#ddf6e2"
+        ]
+      },
+      "flexo-deep": {
+        "role": "primary",
+        "displayName": "Verde Flexo Profundo",
+        "canonical": "oklch(38.4% 0.086 151)",
+        "tonalRamp": [
+          "#020f05",
+          "#112a18",
+          "#25492f",
+          "#3a6a48",
+          "#5b8e68",
+          "#88b091",
+          "#b5d4bc",
+          "#e0f5e4"
+        ]
+      },
+      "flexo-pale": {
+        "role": "primary",
+        "displayName": "Verde Flexo Pálido",
+        "canonical": "oklch(94.1% 0.017 153)",
+        "tonalRamp": [
+          "#090c0a",
+          "#212522",
+          "#3b423d",
+          "#57605a",
+          "#79837c",
+          "#9fa7a1",
+          "#c6ccc8",
+          "#ebf0ec"
+        ]
+      },
+      "alert": {
+        "role": "tertiary",
+        "displayName": "Rojo Imprenta",
+        "canonical": "oklch(54.4% 0.179 28)",
+        "tonalRamp": [
+          "#200000",
+          "#480705",
+          "#741912",
+          "#a42c22",
+          "#d05043",
+          "#eb8375",
+          "#ffb3a7",
+          "#ffdfd6"
+        ]
+      },
+      "alert-pale": {
+        "role": "tertiary",
+        "displayName": "Rojo Pálido",
+        "canonical": "oklch(95.0% 0.019 25)",
+        "tonalRamp": [
+          "#0e0a0a",
+          "#292221",
+          "#473d3c",
+          "#675a59",
+          "#8a7c7b",
+          "#ada1a0",
+          "#d1c8c7",
+          "#f3edec"
+        ]
+      },
+      "amber": {
+        "role": "tertiary",
+        "displayName": "Ámbar de Texto",
+        "canonical": "oklch(50.0% 0.109 69)",
+        "tonalRamp": [
+          "#150800",
+          "#361e00",
+          "#593704",
+          "#805212",
+          "#a67537",
+          "#c59c6e",
+          "#e4c5a2",
+          "#ffebd3"
+        ]
+      },
+      "amber-bar": {
+        "role": "tertiary",
+        "displayName": "Ámbar de Barra",
+        "canonical": "oklch(66.7% 0.138 70)",
+        "tonalRamp": [
+          "#180600",
+          "#3a1b00",
+          "#5f3400",
+          "#884e00",
+          "#af710b",
+          "#cd995b",
+          "#eac396",
+          "#ffeacb"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Títulos de página (44px escritorio, 40px móvil; 64px en el panel kraft del login). Condensada wdth 68, peso 850."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Títulos de modal (28px), tarjeta de login (36px), estado vacío y tapa kraft grande (24px)."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Título del libro en la fila, como enlace."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Datos y texto corrido a 15px con cifras tabulares; ayudas y errores a 13px."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Etiquetas de campo, encabezados de columna, términos de detalle y navegación, en mayúsculas condensadas."
+      },
+      "stamp": {
+        "displayName": "Stamp",
+        "purpose": "Texto de sellos de género y «Sin stock»."
+      },
+      "button": {
+        "displayName": "Button",
+        "purpose": "Texto de botones (13px en tamaño pequeño)."
+      }
+    },
+    "shadows": [
+      {
+        "name": "toast",
+        "value": "0 8px 24px -12px rgb(30 30 28 / 0.45)",
+        "purpose": "Única sombra del sistema: separa notificaciones flotantes del contenido."
+      }
+    ],
+    "motion": [
+      {
+        "name": "color-state",
+        "value": "150ms ease",
+        "purpose": "Cambios de color y borde en botones y controles."
+      },
+      {
+        "name": "toggle",
+        "value": "200ms ease-out",
+        "purpose": "Desplazamiento de la perilla y color de la pista del interruptor."
+      },
+      {
+        "name": "sheet-in",
+        "value": "220ms cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Entrada del modal (translateY 12px, opacidad 0.6 a 1); sólo sin prefers-reduced-motion."
+      },
+      {
+        "name": "slide",
+        "value": "1s ease-in-out infinite",
+        "purpose": "Barra de progreso flexo de 3px al refrescar el listado."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "sm",
+        "value": "640px"
+      },
+      {
+        "name": "md",
+        "value": "768px"
+      },
+      {
+        "name": "lg",
+        "value": "1024px"
+      },
+      {
+        "name": "container",
+        "value": "1440px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Botón primario",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "La única acción verde de cada vista.",
+      "html": "<button class=\"ds-btn-primary\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" aria-hidden=\"true\"><path d=\"M5 12h14\"/><path d=\"M12 5v14\"/></svg>Nuevo libro</button>",
+      "css": ".ds-btn-primary{display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 16px;font-family: var(--font-sans);font-size:14px;font-weight:600;color:#fff;background:var(--color-flexo);border:1.5px solid var(--color-flexo);border-radius:var(--radius-sheet);cursor:pointer;transition:background-color 150ms,border-color 150ms}.ds-btn-primary:hover{background:var(--color-flexo-deep);border-color:var(--color-flexo-deep)}.ds-btn-primary:focus-visible{outline:2px dashed var(--color-ink);outline-offset:2px}"
+    },
+    {
+      "name": "Botón de contorno",
+      "kind": "button",
+      "refersTo": "button-outline",
+      "description": "Variante por defecto; se invierte a tinta en hover.",
+      "html": "<button class=\"ds-btn-outline\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4\"/><path d=\"m7 10 5 5 5-5\"/><path d=\"M12 15V3\"/></svg>Exportar CSV</button>",
+      "css": ".ds-btn-outline{display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 16px;font-family: var(--font-sans);font-size:14px;font-weight:600;color:var(--color-ink);background:transparent;border:1.5px solid var(--color-ink);border-radius:var(--radius-sheet);cursor:pointer;transition:background-color 150ms,color 150ms}.ds-btn-outline:hover{background:var(--color-ink);color:var(--color-sheet)}.ds-btn-outline:focus-visible{outline:2px dashed var(--color-ink);outline-offset:2px}"
+    },
+    {
+      "name": "Botón fantasma",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "Acción terciaria; aparece un filete en hover.",
+      "html": "<button class=\"ds-btn-ghost\">Limpiar filtros</button>",
+      "css": ".ds-btn-ghost{display:inline-flex;align-items:center;height:32px;padding:0 12px;font-family: var(--font-sans);font-size:13px;font-weight:600;color:var(--color-ink);background:transparent;border:1.5px solid transparent;border-radius:var(--radius-sheet);cursor:pointer;transition:border-color 150ms}.ds-btn-ghost:hover{border-color:var(--color-rule)}.ds-btn-ghost:focus-visible{outline:2px dashed var(--color-ink);outline-offset:2px}"
+    },
+    {
+      "name": "Botón de peligro",
+      "kind": "button",
+      "refersTo": "button-danger",
+      "description": "Sólo para confirmar una eliminación.",
+      "html": "<button class=\"ds-btn-danger\">Eliminar</button>",
+      "css": ".ds-btn-danger{display:inline-flex;align-items:center;height:40px;padding:0 16px;font-family: var(--font-sans);font-size:14px;font-weight:600;color:#fff;background:var(--color-alert);border:1.5px solid var(--color-alert);border-radius:var(--radius-sheet);cursor:pointer}.ds-btn-danger:focus-visible{outline:2px dashed var(--color-ink);outline-offset:2px}"
+    },
+    {
+      "name": "Campo de texto",
+      "kind": "input",
+      "refersTo": "input-field",
+      "description": "Etiqueta condensada encima; con valor, el borde pasa a línea de troquel.",
+      "html": "<div class=\"ds-field\"><label class=\"ds-field-label\">Título</label><input class=\"ds-input\" placeholder=\"Buscar por título\"><input class=\"ds-input ds-input-active\" value=\"Dune\" aria-label=\"Filtro activo\"></div>",
+      "css": ".ds-field{display:grid;gap:6px;max-width:320px;font-family: var(--font-sans);}.ds-field-label{font-size:11px;font-weight:700;font-stretch:80%;letter-spacing:0.1em;text-transform:uppercase;color:var(--color-ink-2)}.ds-input{height:40px;width:100%;padding:0 12px;font:inherit;font-size:15px;color:var(--color-ink);background:var(--color-sheet);border:1px solid var(--color-field);border-radius:var(--radius-sheet);transition:border-color 150ms}.ds-input::placeholder{color:var(--color-ink-3)}.ds-input:hover{border-color:var(--color-ink)}.ds-input:focus-visible{outline:2px dashed var(--color-ink);outline-offset:2px}.ds-input-active{border:1.5px dashed var(--color-ink)}"
+    },
+    {
+      "name": "Sello de género",
+      "kind": "chip",
+      "refersTo": "genre-stamp",
+      "description": "Género como sello entintado; en rojo para «Sin stock».",
+      "html": "<span class=\"ds-stamp\">Ciencia ficción</span> <span class=\"ds-stamp ds-stamp-out\">Sin stock</span>",
+      "css": ".ds-stamp{display:inline-block;padding:2px 6px;font-family: var(--font-sans);font-size:11px;font-weight:750;font-stretch:72%;letter-spacing:0.08em;text-transform:uppercase;white-space:nowrap;color:var(--color-ink);border:1.5px solid var(--color-ink)}.ds-stamp-out{color:var(--color-alert);border-color:var(--color-alert)}"
+    },
+    {
+      "name": "Barra kraft",
+      "kind": "nav",
+      "refersTo": "top-bar",
+      "description": "Marco superior de 60px con marca condensada y navegación subrayada.",
+      "html": "<header class=\"ds-bar\"><a class=\"ds-brand\">CMPC <span>LIBROS</span></a><a class=\"ds-nav ds-nav-active\">Catálogo</a><button class=\"ds-logout\">Salir</button></header>",
+      "css": ".ds-bar{display:flex;align-items:stretch;gap:40px;height:60px;padding:0 32px;background:var(--color-kraft);border-bottom:1px solid var(--color-kraft-deep);color:var(--color-ink);font-family: var(--font-sans);}.ds-brand{align-self:center;font-size:24px;font-weight:850;font-stretch:68%;line-height:1}.ds-brand span{font-weight:400}.ds-nav{display:flex;align-items:center;font-size:13px;font-weight:700;font-stretch:80%;letter-spacing:0.1em;text-transform:uppercase;border-bottom:3px solid transparent}.ds-nav:hover{border-bottom-color:var(--color-kraft-deep)}.ds-nav-active{border-bottom-color:var(--color-ink)}.ds-logout{align-self:center;margin-left:auto;height:32px;padding:0 12px;font:inherit;font-size:13px;font-weight:600;color:var(--color-ink);background:transparent;border:1.5px solid var(--color-ink);border-radius:var(--radius-sheet);cursor:pointer}.ds-logout:hover{background:var(--color-ink);color:var(--color-kraft)}.ds-logout:focus-visible{outline:2px dashed var(--color-ink);outline-offset:2px}"
+    },
+    {
+      "name": "Rampa de stock",
+      "kind": "custom",
+      "description": "Cuatro peldaños fijos más la cifra; ámbar en nivel bajo.",
+      "html": "<span class=\"ds-ramp\"><span class=\"ds-steps\"><i class=\"on\"></i><i class=\"on\"></i><i class=\"on\"></i><i></i></span>11</span> <span class=\"ds-ramp ds-ramp-low\"><span class=\"ds-steps\"><i class=\"on\"></i><i></i><i></i><i></i></span>3</span>",
+      "css": ".ds-ramp{display:inline-flex;align-items:center;gap:8px;font-family: var(--font-sans);font-weight:600;font-variant-numeric:tabular-nums;color:var(--color-ink)}.ds-steps{display:flex;gap:2px}.ds-steps i{display:block;width:6px;height:14px;background:var(--color-rule)}.ds-steps i.on{background:var(--color-ink)}.ds-ramp-low{color:var(--color-amber)}.ds-ramp-low .ds-steps i.on{background:var(--color-amber-bar)}"
+    },
+    {
+      "name": "Paginación",
+      "kind": "custom",
+      "refersTo": "pagination-page",
+      "description": "Página actual marcada con línea de troquel.",
+      "html": "<nav class=\"ds-pages\"><button class=\"ds-page\" aria-current=\"page\">1</button><button class=\"ds-page\">2</button><button class=\"ds-page\">3</button></nav>",
+      "css": ".ds-pages{display:flex;gap:6px;font-family: var(--font-sans);}.ds-page{min-width:36px;height:36px;padding:0 8px;font:inherit;font-weight:600;color:var(--color-ink);background:transparent;border:1px solid var(--color-rule);border-radius:var(--radius-sheet);cursor:pointer}.ds-page:hover{border-color:var(--color-ink)}.ds-page[aria-current=page]{border:1.5px dashed var(--color-ink)}.ds-page:focus-visible{outline:2px dashed var(--color-ink);outline-offset:2px}"
+    }
+  ],
+  "narrative": {
+    "northStar": "Cartulina y tinta",
+    "overview": "La herramienta se imprime como un pliego de embalaje: una cara blanca de cartulina white-top donde se trabaja, un marco kraft que la sostiene, y tinta flexo negra para todo lo que se lee. El verde flexo marca la única acción primaria por vista; el rojo y el ámbar aparecen sólo cuando hay un estado que comunicar. No hay gradientes, ni vidrio, ni sombras de adorno: la profundidad la dan filetes de 1 px y el cambio de material (kraft, board, sheet).\n\nEl gesto distintivo viene del troquel: una línea punteada de 1,5 px marca lo que está activo (un filtro con valor, la columna que ordena, la página actual, la fila con foco, la ventana de carga de portada) y también el foco de teclado. Una sola familia, Archivo de ancho variable, hace de voz condensada en mayúsculas para marca, títulos y etiquetas, y de texto normal con cifras tabulares para los datos. La densidad es de herramienta de trabajo: filas de 60 px, controles de 40 px, nada que decore sin informar.\n\nEl sistema rechaza el panel gris con acento azul y barra lateral propio de la categoría de admin.",
+    "keyCharacteristics": [
+      "Tres materiales: kraft (marco), board (mesa), sheet (zona de trabajo).",
+      "Tinta casi negra (#1e1e1c) para texto, contornos de botón y sellos.",
+      "Línea de troquel punteada como único marcador de estado activo y de foco.",
+      "Archivo Variable condensada (wdth 68, peso 850) para títulos; normal para datos.",
+      "Esquinas de 2 px, filetes de 1 px, bordes de control de 1,5 px.",
+      "Color de estado sólo para estado: verde = acción/éxito, rojo = error/sin stock, ámbar = stock bajo."
+    ],
+    "rules": [
+      {
+        "name": "The State-Only Color Rule",
+        "body": "Rojo y ámbar existen sólo para comunicar estado (error, sin stock, stock bajo). Nunca decoran.",
+        "section": "colors"
+      },
+      {
+        "name": "The One Green Rule",
+        "body": "El verde flexo marca una sola acción primaria por vista; las demás acciones son de contorno o fantasma.",
+        "section": "colors"
+      },
+      {
+        "name": "The Kraft Frame Rule",
+        "body": "El kraft enmarca (barra, panel de login, tapa sin imagen); la zona de trabajo siempre es cartulina blanca sobre mesa.",
+        "section": "colors"
+      },
+      {
+        "name": "The One Family Rule",
+        "body": "Archivo Variable es la única familia. La jerarquía se construye con ancho y peso, no con una segunda fuente.",
+        "section": "typography"
+      },
+      {
+        "name": "The Label Once Rule",
+        "body": "Nada se etiqueta dos veces: la miniatura de portada no repite el título que ya está en la fila.",
+        "section": "typography"
+      },
+      {
+        "name": "The Flat Sheet Rule",
+        "body": "Ninguna superficie en reposo lleva sombra. Si algo necesita separarse, se le da un filete o un cambio de material.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Die-Line Rule",
+        "body": "Lo activo se marca con una línea punteada de tinta de 1,5px (borde o contorno interior a −4px); el foco de teclado es la misma línea a 2px con 2px de separación. Ningún otro recurso (relleno de color, subrayado, glow) marca selección.",
+        "section": "shapes"
+      }
+    ],
+    "dos": [
+      "**Do** marcar todo estado activo (filtro con valor, orden de columna, página actual, fila con foco) con la línea de troquel punteada de tinta de 1,5px.",
+      "**Do** usar una sola acción verde flexo por vista; el resto, contorno o fantasma.",
+      "**Do** usar `amber` (#8a5600) para texto de stock bajo y `amber-bar` (#c98318) sólo para el peldaño de la rampa.",
+      "**Do** construir jerarquía con el eje de ancho de Archivo Variable (68 para títulos, 80 para etiquetas, 72 para sellos) y cifras tabulares para datos.",
+      "**Do** imprimir una tapa kraft cuando falte la portada, a proporción fija 3:4.",
+      "**Do** mantener 2px de radio y filetes de 1px en toda superficie nueva."
+    ],
+    "donts": [
+      "**Don't** usar el panel gris con acento azul y barra lateral típico de los admin.",
+      "**Don't** poner sombras en superficies en reposo; la única sombra es la del toast flotante.",
+      "**Don't** usar rojo o ámbar como decoración, ni el kraft como fondo de la zona de trabajo.",
+      "**Don't** introducir una segunda familia tipográfica.",
+      "**Don't** repetir una etiqueta que ya se lee en el contexto (la miniatura no repite el título de la fila).",
+      "**Don't** inventar portadas ni imágenes de producto; las portadas son subidas del usuario o la tapa kraft."
+    ]
+  }
+}
